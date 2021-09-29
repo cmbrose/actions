@@ -3,6 +3,8 @@ name: Add Issue to Memex
 on:
   pull_request:
     types: [labeled]
+  issues:
+    types: [labeled]
 
 jobs:
   sync:
@@ -13,5 +15,8 @@ jobs:
     - uses: Amadevus/pwsh-script@v2
       name: Dump event
       with:
-        script: |       
-          Write-ActionInfo ($github.event | convertto-json -depth 100)        
+        script: |   
+          $triggerItem = $github.event.issue ?? $github.event.pull_request
+          $itemId = $triggerItem.node_id
+          
+          Write-ActionInfo ($itemId)        
