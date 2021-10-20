@@ -11,8 +11,5 @@ jobs:
     - uses: Amadevus/pwsh-script@v2
       name: Dump event
       with:
-        script: |   
-          $triggerItem = $github.event.issue ?? $github.event.pull_request
-          $itemId = $triggerItem.node_id
-          
-          Write-ActionInfo ($itemId) 
+        script: |             
+          Write-ActionInfo ($github.event.issue | Convertto-Json -Depth 100) 
