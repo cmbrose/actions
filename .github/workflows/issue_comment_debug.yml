@@ -1,9 +1,18 @@
-on: issue_comment
+on: 
+  issue_comment:
+    types: [edited, created]
 
 jobs:
   issue_commented:
     name: Issue comment
+    if: ${{ !github.event.issue.pull_request }}
     runs-on: ubuntu-latest
-    steps:
-      - run: |
-          echo "Comment on issue #${{ github.event.issue }}"
+    steps:        
+    - uses: Amadevus/pwsh-script@v2
+      name: Dump event
+      with:
+        script: |   
+          $triggerItem = $github.event.issue ?? $github.event.pull_request
+          $itemId = $triggerItem.node_id
+          
+          Write-ActionInfo ($itemId) 
