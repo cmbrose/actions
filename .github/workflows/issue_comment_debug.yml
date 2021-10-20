@@ -12,4 +12,4 @@ jobs:
       name: Dump event
       with:
         script: |             
-          Write-ActionInfo ($github.event | Convertto-Json -Depth 100) 
+          Write-ActionInfo ($github.event.comment.body | Convertto-Json -Depth 100) 
