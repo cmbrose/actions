@@ -15,8 +15,8 @@ jobs:
         PATTERN="https:\/\/dev\.azure\.com\/[^\/]+\/[^\/]+\/_git\/[^\/]+\/pullrequest\/[[:digit:]]+"
         URL=$(echo $BODY | grep -oE $PATTERN)
         CNT=$(echo $BODY | grep -oE $PATTERN | wc -l)
-        echo "::set-output name=URL::'$URL'"
         echo "::set-output name=CNT::$CNT"
+        echo "::set-output name=URL::$URL"
         
     - uses: Amadevus/pwsh-script@v2
       if: ${{ steps.check-url.outputs.CNT }} == 1
