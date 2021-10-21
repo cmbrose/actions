@@ -11,11 +11,15 @@ jobs:
     - name: Check for urls
       id: check-url
       run: |
-        URL=$(echo '${{ github.event.comment.body }}' | grep -oE "https:\/\/dev\.azure\.com\/[^\/]+\/[^\/]+\/_git\/[^\/]+\/pullrequest\/[[:digit:]]+")
+        BODY='${{ github.event.comment.body }}'
+        PATTERN="https:\/\/dev\.azure\.com\/[^\/]+\/[^\/]+\/_git\/[^\/]+\/pullrequest\/[[:digit:]]+"
+        URL=$(echo $BODY | grep -oE $PATTERN)
+        CNT=$(echo $BODY | grep -oE $PATTERN | wc -l)
         echo "::set-output name=URL::'$URL'"
+        echo "::set-output name=CNT::'$CNT'"
         
     - uses: Amadevus/pwsh-script@v2
-      if: ${{ steps.check-url.outputs.URL }}
+      if: ${{ steps.check-url.outputs.CNT }} == 1
       name: Dump event
       with:
         script: |             
