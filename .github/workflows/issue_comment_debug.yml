@@ -15,8 +15,8 @@ jobs:
         echo "::set-output name=URL::$URL"
         
     - uses: Amadevus/pwsh-script@v2
-      if: ${{ steps.check-url.URL }}
+      if: ${{ steps.check-url.outputs.URL }}
       name: Dump event
       with:
         script: |             
-          Write-ActionInfo ${{ steps.check-url.URL }}
+          Write-ActionInfo ${{ steps.check-url.outputs.URL }}
