@@ -11,7 +11,7 @@ jobs:
     - name: Check for urls
       id: check-url
       run: |
-        URL=$(echo ${{ github.event.comment.body }} | grep -oE "https:\/\/dev\.azure\.com\/[^\/]+\/[^\/]+\/_git\/[^\/]+\/pullrequest\/[[:digit:]]+")
+        URL=$(echo '${{ github.event.comment.body }}' | grep -oE "https:\/\/dev\.azure\.com\/[^\/]+\/[^\/]+\/_git\/[^\/]+\/pullrequest\/[[:digit:]]+")
         echo "::set-output name=URL::$URL"
         
     - uses: Amadevus/pwsh-script@v2
