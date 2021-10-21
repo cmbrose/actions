@@ -7,9 +7,16 @@ jobs:
     name: Issue comment
     if: ${{ !github.event.issue.pull_request }}
     runs-on: ubuntu-latest
-    steps:        
+    steps:
+    - name: Check for urls
+      id: check-url
+      run: |
+        URL=$(echo ${{ $github.event.comment.body }} | grep -oE "https:\/\/dev\.azure\.com\/[^\/]+\/[^\/]+\/_git\/[^\/]+\/pullrequest\/[[:digit:]]+")
+        echo "::set-output name=URL::$URL"
+        
     - uses: Amadevus/pwsh-script@v2
+      if: ${{ steps.check-url.URL }}
       name: Dump event
       with:
         script: |             
-          Write-ActionInfo ($github.event.comment.body | Convertto-Json -Depth 100) 
+          Write-ActionInfo ${{ steps.check-url.URL }}
