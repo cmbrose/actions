@@ -19,7 +19,7 @@ jobs:
         echo "::set-output name=URL::$URL"
         
     - uses: Amadevus/pwsh-script@v2
-      if: ${{ steps.check-url.outputs.CNT }} == 1
+      if: ${{ steps.check-url.outputs.CNT == 1 }}
       name: Dump event
       with:
         script: |             
