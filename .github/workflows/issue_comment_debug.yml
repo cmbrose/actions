@@ -23,5 +23,4 @@ jobs:
       name: Dump event
       with:
         script: |             
-          Write-ActionInfo "${{ steps.check-url.outputs.CNT }}"
           Write-ActionInfo "${{ steps.check-url.outputs.URL }}"
