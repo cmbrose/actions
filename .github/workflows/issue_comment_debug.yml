@@ -12,7 +12,7 @@ jobs:
       id: check-url
       run: |
         URL=$(echo '${{ github.event.comment.body }}' | grep -oE "https:\/\/dev\.azure\.com\/[^\/]+\/[^\/]+\/_git\/[^\/]+\/pullrequest\/[[:digit:]]+")
-        echo "::set-output name=URL::$URL"
+        echo "::set-output name=URL::'$URL'"
         
     - uses: Amadevus/pwsh-script@v2
       if: ${{ steps.check-url.outputs.URL }}
