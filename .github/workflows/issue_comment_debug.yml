@@ -19,4 +19,4 @@ jobs:
       name: Dump event
       with:
         script: |             
-          Write-ActionInfo ${{ steps.check-url.outputs.URL }}
+          Write-ActionInfo "${{ steps.check-url.outputs.URL }}"
