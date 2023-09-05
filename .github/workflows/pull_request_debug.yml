@@ -1,8 +1,6 @@
 on:
   pull_request:
     types: [labeled, edited, opened, synchronize, reopened]
-  issues:
-    types: [labeled]
 
 jobs:
   sync:
@@ -14,4 +12,4 @@ jobs:
       name: Dump event
       with:
         script: |             
-          Write-ActionInfo ($github.event)        
+          Write-ActionInfo ($github.event.pull_request.author)        
