@@ -1,6 +1,6 @@
 on:
   pull_request:
-    types: [labeled, edited, opened, synchronize, reopened]
+    types: [labeled, edited, opened, synchronize, reopened, closed]
 
 jobs:
   sync:
