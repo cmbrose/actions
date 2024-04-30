@@ -12,4 +12,4 @@ jobs:
       name: Dump event
       with:
         script: |             
-          Write-ActionInfo ($github.event.pull_request.author)        
+          Write-ActionInfo (ConvertTo-Json -Depth 100 $github.event.pull_request)        
